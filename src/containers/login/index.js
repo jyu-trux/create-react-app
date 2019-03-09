@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -46,6 +46,12 @@ const styles = theme => ({
 
 
 function Login(props) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  console.log(`%cStarting inside ${''}`, 'background-color:green; color: white; padding; 4px');
+  console.log('email ===>', email);
+  console.log('password', password);
+  console.log('%cEnding', 'background-color:red; color: white; padding; 4px');
   const { classes } = props;
 
   return (
@@ -53,19 +59,27 @@ function Login(props) {
       <CssBaseline />
       <Paper className={classes.paper}>
         <Avatar className={classes.avatar}>
-          {/* <LockOutlinedIcon /> */}
         </Avatar>
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
         <form className={classes.form}>
           <FormControl margin="normal" required fullWidth>
+          {/**
+          Well, since this is a functional component,
+          we don’t have setState to help us modify the value of the state variable.
+          What we do have is setEmail whose sole purpose is to update email every time we call it.
+
+          We’re basically declaring a state variable and a function to allow us to modify the state variable later.
+          The empty string in the useState call is the initial value of Email and can be set to any required value.
+          We’ll set it to an empty string for now.
+          */}
             <InputLabel htmlFor="email">Email Address</InputLabel>
-            <Input id="email" name="email" autoComplete="email" autoFocus />
+            <Input id="email" name="email" autoComplete="email" autoFocus onChange={e => setEmail(e.target.value)} value={email}/>
           </FormControl>
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="password">Password</InputLabel>
-            <Input name="password" type="password" id="password" autoComplete="current-password" />
+            <Input name="password" type="password" id="password" onChange={e => setPassword(e.target.value)} value={password} autoComplete="current-password" />
           </FormControl>
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
