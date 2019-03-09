@@ -46,14 +46,13 @@ const styles = theme => ({
 
 
 function Login(props) {
+  const { classes } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  console.log(`%cStarting inside ${''}`, 'background-color:green; color: white; padding; 4px');
-  console.log('email ===>', email);
-  console.log('password', password);
-  console.log('%cEnding', 'background-color:red; color: white; padding; 4px');
-  const { classes } = props;
-
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    alert(`Submitting: ${email} ${password}`)
+}
   return (
     <main className={classes.main}>
       <CssBaseline />
@@ -91,6 +90,7 @@ function Login(props) {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={handleSubmit}
           >
             Sign in
           </Button>
